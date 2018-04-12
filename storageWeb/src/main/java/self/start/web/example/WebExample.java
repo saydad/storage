@@ -35,8 +35,4 @@ public class WebExample {
         rawRepository.save(item);
         return "success";
     }
-
-    public void test() {
-        System.out.print("哈哈");
-    }
 }
