@@ -1,0 +1,15 @@
+tal_platform_config:
+       peiyou:
+          csIdMapping:
+                selectCourse: 012740f7f6fc4c568ffc006b7a6e6291
+                adjustCourse: 012740f7f6fc4c568ffc006b7a6e6291
+                changeClass: 012740f7f6fc4c568ffc006b7a6e6291
+                kuabao: 012740f7f6fc4c568ffc006b7a6e6291
+                applyRefundableFee: 6e32b082676f4dbba6b60045d7281d3b
+                refundableFeeDetail: 6e32b082676f4dbba6b60045d7281d3b
+                changePhoneNum: cdddf236a30a4665842ffffbcc6ac617
+                bindPhoneNum: cdddf236a30a4665842ffffbcc6ac617
+          icoUrl: http://www.xxxx.com/image/image1
+       zhikang:
+          test:
+            xx1: 12
