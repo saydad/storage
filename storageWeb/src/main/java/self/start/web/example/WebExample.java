@@ -27,8 +27,9 @@ public class WebExample {
     }
 
     @RequestMapping("/save")
-    public String save(@RequestParam("name") String name, @RequestParam("num") int num) {
+    public String save(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("num") int num) {
         XxEntity item = new XxEntity();
+        item.setId(id);
         item.setName(name);
         item.setNum(num);
         rawRepository.save(item);
