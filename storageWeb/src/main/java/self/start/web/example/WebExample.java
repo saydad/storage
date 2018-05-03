@@ -35,4 +35,8 @@ public class WebExample {
         rawRepository.save(item);
         return "success";
     }
+
+    public void test() {
+
+    }
 }
