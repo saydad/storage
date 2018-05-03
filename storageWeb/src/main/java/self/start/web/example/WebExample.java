@@ -37,6 +37,6 @@ public class WebExample {
     }
 
     public void test() {
-
+        System.out.print("哈哈");
     }
 }
