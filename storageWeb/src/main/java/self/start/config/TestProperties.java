@@ -1,24 +1,33 @@
 package self.start.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * @author lyongy.liu on 下午 8:35.
  */
 @Component
-@PropertySource("classpath:/test.properties")
-@ConfigurationProperties(prefix = "test")
+@ConfigurationProperties(prefix = "tal.platform")
 public class TestProperties {
 
-    private String name;
+    private Map<String, Map<String, String>> config;
 
-    public String getName() {
-        return name;
+    public Map<String, Map<String, String>> getConfig() {
+        return config;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setConfig(Map<String, Map<String, String>> config) {
+        this.config = config;
+    }
+
+    @Override
+    public String toString() {
+        return "TestProperties{" +
+                "config=" + config +
+                '}';
     }
 }
