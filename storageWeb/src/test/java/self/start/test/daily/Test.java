@@ -78,4 +78,8 @@ public class Test {
     public void temp() {
 
     }
+
+    public void temp2() {
+
+    }
 }
