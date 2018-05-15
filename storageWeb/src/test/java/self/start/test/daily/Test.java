@@ -73,4 +73,9 @@ public class Test {
 
         System.out.println(param);
     }
+
+    @org.junit.Test
+    public void temp() {
+
+    }
 }
