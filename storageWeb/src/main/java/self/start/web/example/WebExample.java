@@ -1,5 +1,7 @@
 package self.start.web.example;
 
+import com.google.common.collect.Maps;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +12,15 @@ import self.start.Persistence.bean.XxEntity;
 import self.start.Persistence.repository.RawRepository;
 import self.start.Persistence.repository.TestRepository;
 import self.start.config.TestProperties;
+import self.start.service.HttpTestService;
+import self.start.service.RabbitSender;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * spring boot web例子
@@ -28,6 +35,10 @@ public class WebExample {
     private RawRepository rawRepository;
     @Resource
     private TestProperties testProperties;
+    @Resource
+    private RabbitSender rabbitSender;
+    @Resource
+    private HttpTestService httpTestService;
 
     @RequestMapping("/select")
     public XxEntity handle(@RequestParam("id") int id) {
@@ -44,9 +55,24 @@ public class WebExample {
         return "success";
     }
 
-    @PostMapping("/param")
-    public Map<String, List<String>> test(@RequestBody Map<String, List<String>> param) {
-        return param;
+    @PostMapping("/msg")
+    public void test(@RequestBody Map<String, String> param) {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        for (int i = 0; i < 5; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+
+                        countDownLatch.await();
+                        rabbitSender.sendMsg(param);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+        countDownLatch.countDown();
     }
 
     @PostMapping("/fileUpload")
@@ -59,4 +85,15 @@ public class WebExample {
         System.out.println(fileName + "-->" + size);
         return "ok";
     }
+
+    @GetMapping("/error")
+    public String cause500() {
+        try {
+            TimeUnit.MILLISECONDS.sleep(15000);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+        return "error";
+    }
+
 }

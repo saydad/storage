@@ -6,11 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.TreeTraversingParser;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLParser;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 
 /**
  * @Author 刘勇(liuyong4)
@@ -57,5 +60,17 @@ public class Test {
         } catch (IOException e) {
             System.out.print(e.toString());
         }
+    }
+
+    @org.junit.Test
+    public void sort() {
+        Map<String, String> param = Maps.newTreeMap(Ordering.natural());
+        param.put("stu_id", "124dsaf");
+        param.put("city_id", "fdsaaf");
+        param.put("type", "1");
+        param.put("level", "1");
+        param.put("service_id", "45f4dafd");
+
+        System.out.println(param);
     }
 }
