@@ -1,9 +1,9 @@
-package self.start.Persistence.repository;
+package self.start.persistence.repository;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import self.start.Persistence.bean.XxEntity;
+import self.start.persistence.bean.XxEntity;
 
 import javax.annotation.Resource;
 

@@ -1,6 +1,5 @@
 package self.start.web.example;
 
-import com.google.common.collect.Maps;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,16 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import self.start.Persistence.bean.XxEntity;
-import self.start.Persistence.repository.RawRepository;
-import self.start.Persistence.repository.TestRepository;
+import self.start.persistence.bean.XxEntity;
+import self.start.persistence.repository.RawRepository;
+import self.start.persistence.repository.TestRepository;
 import self.start.config.TestProperties;
 import self.start.service.HttpTestService;
 import self.start.service.RabbitSender;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -73,6 +70,10 @@ public class WebExample {
             }).start();
         }
         countDownLatch.countDown();
+    }
+
+    public void testRebase() {
+        System.out.println("xxxxxxxxxx");
     }
 
     @PostMapping("/fileUpload")

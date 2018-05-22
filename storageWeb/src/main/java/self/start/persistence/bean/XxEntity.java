@@ -1,4 +1,4 @@
-package self.start.Persistence.bean;
+package self.start.persistence.bean;
 
 import com.google.common.base.Objects;
 import org.hibernate.annotations.GenericGenerator;

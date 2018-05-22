@@ -1,10 +1,10 @@
-package self.start.Persistence.repository;
+package self.start.persistence.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import self.start.Persistence.bean.XxEntity;
+import self.start.persistence.bean.XxEntity;
 
 import javax.persistence.Table;
 
