@@ -42,7 +42,8 @@ public class OrderController {
                     @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "30000") //断路30s后尝试执行, 默认为5s
             })
     public String getOrderPageList() {
-        try {
+        throw new RuntimeException("xx");
+        /*try {
             System.out.println("====== main function start ======");
             CloseableHttpResponse execute = httpClient.execute(new HttpGet("http://localhost:8080/error"));
             if (execute != null && execute.getEntity() != null) {
@@ -54,7 +55,7 @@ public class OrderController {
             System.out.println("====== main function exception ======");
             System.out.println(e);
             return "except";
-        }
+        }*/
     }
 
     public String getOrderPageListFallback(){

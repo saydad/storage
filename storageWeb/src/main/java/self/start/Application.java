@@ -1,5 +1,6 @@
 package self.start;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -9,8 +10,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
  * @author lyongy.liu on 下午 8:08.
  */
 @SpringBootApplication
-//扫描servlet listener filter
-@ServletComponentScan
+@EnableAutoConfiguration
 public class Application extends SpringBootServletInitializer {
 
     @Override

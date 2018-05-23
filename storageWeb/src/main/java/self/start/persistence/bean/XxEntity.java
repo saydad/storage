@@ -1,16 +1,20 @@
 package self.start.persistence.bean;
 
-import com.google.common.base.Objects;
+import com.google.common.collect.Sets;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Basic;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * @author lyongy.liu on 下午 7:45.
@@ -22,6 +26,7 @@ public class XxEntity {
     private String name;
     private int num;
     private Date operationTime;
+    private Set<String> address = Sets.newHashSet();
 
     @Id
     @GeneratedValue(generator = "mysql")
@@ -65,6 +70,17 @@ public class XxEntity {
         this.operationTime = operationTime;
     }
 
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "address_table", joinColumns = {@JoinColumn(name = "id")})
+    @Column(name = "custom_address")
+    public Set<String> getAddress() {
+        return address;
+    }
+
+    public void setAddress(Set<String> address) {
+        this.address = address;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,11 +88,14 @@ public class XxEntity {
         XxEntity xxEntity = (XxEntity) o;
         return id == xxEntity.id &&
                 num == xxEntity.num &&
-                Objects.equal(name, xxEntity.name);
+                java.util.Objects.equals(name, xxEntity.name) &&
+                java.util.Objects.equals(operationTime, xxEntity.operationTime) &&
+                java.util.Objects.equals(address, xxEntity.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, name, num);
+
+        return java.util.Objects.hash(id, name, num, operationTime, address);
     }
 }

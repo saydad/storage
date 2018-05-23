@@ -13,3 +13,9 @@ tal_platform_config:
        zhikang:
           test:
             xx1: 12
+
+
+test:
+  values:
+    aa: /v1/a,/v1/b,/v1/c
+    bb: /v2/c,/v2/d

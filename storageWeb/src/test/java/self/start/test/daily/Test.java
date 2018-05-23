@@ -8,6 +8,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLParser;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
+import self.start.inter.Method;
 
 import java.io.IOException;
 import java.io.InputStream;
