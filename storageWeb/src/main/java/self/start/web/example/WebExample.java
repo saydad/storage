@@ -72,10 +72,6 @@ public class WebExample {
         countDownLatch.countDown();
     }
 
-    public void testRebase() {
-        System.out.println("xxxxxxxxxx");
-    }
-
     @PostMapping("/fileUpload")
     public String fileUpload(@RequestParam("fileName") MultipartFile file){
         if(file.isEmpty()){
