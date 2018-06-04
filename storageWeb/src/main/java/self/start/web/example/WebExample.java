@@ -1,26 +1,24 @@
 package self.start.web.example;
 
 import com.google.common.collect.Sets;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import self.start.config.TestProperties;
 import self.start.persistence.bean.XxEntity;
 import self.start.persistence.repository.RawRepository;
 import self.start.persistence.repository.TestRepository;
-import self.start.config.TestProperties;
 import self.start.service.HttpTestService;
 import self.start.service.RabbitSender;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 /**
  * spring boot web例子
@@ -40,6 +38,11 @@ public class WebExample {
     @Resource
     private HttpTestService httpTestService;
 
+    @Value("${profile.test}")
+    private String value;
+    @Value("${extend.value}")
+    private String extendValue;
+
     @RequestMapping("/select")
     public XxEntity handle(@RequestParam("id") int id) {
         return testRepository.findOne(id);
@@ -56,26 +59,6 @@ public class WebExample {
         return "success";
     }
 
-    @PostMapping("/msg")
-    public void test(@RequestBody Map<String, String> param) {
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        for (int i = 0; i < 5; i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-
-                        countDownLatch.await();
-                        rabbitSender.sendMsg(param);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-        }
-        countDownLatch.countDown();
-    }
-
     @PostMapping("/fileUpload")
     public String fileUpload(@RequestParam("fileName") MultipartFile file){
         if(file.isEmpty()){
@@ -87,14 +70,13 @@ public class WebExample {
         return "ok";
     }
 
-    @GetMapping("/error")
-    public String cause500(@RequestParam("ids") List<Integer> ids) {
-        return ids.toString();
+    @PostMapping(path = "/error", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, Object> cause500(@RequestBody Map<String, Object> param) {
+        return param;
     }
 
-    @GetMapping(path = "/handle/{id}")
-    public void handle(@PathVariable(name = "id", required = false) Long id, @RequestParam(name = "name", required = false) String name) {
-        System.out.println(id);
-        System.out.println(name);
+    @GetMapping("/test")
+    public String test() {
+        return value + " " + extendValue;
     }
 }

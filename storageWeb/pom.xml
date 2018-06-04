@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>self.start</groupId>
     <artifactId>storage-Web</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>storage-Web Maven Webapp</name>
     <url>http://maven.apache.org</url>
@@ -72,6 +72,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--h2-->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -109,53 +116,6 @@
             <version>1.5.12</version>
         </dependency>
     </dependencies>
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <deploy.type>dev</deploy.type>
-            </properties>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                    </resource>
-                    <resource>
-                        <directory>src/main/config/dev</directory>
-                    </resource>
-                    <resource>
-                        <directory>src/main/webapp</directory>
-                        <!--注意此次必须要放在此目录下才能被访问到-->
-                        <targetPath>/META-INF/resources/</targetPath>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <deploy.type>prod</deploy.type>
-            </properties>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                    </resource>
-                    <resource>
-                        <directory>src/main/config/prod</directory>
-                    </resource>
-                    <resource>
-                        <directory>src/main/webapp</directory>
-                        <!--注意此次必须要放在此目录下才能被访问到-->
-                        <targetPath>META-INF/resources</targetPath>
-                        <includes>
-                            <include>**/**</include>
-                        </includes>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-    </profiles>
 
     <build>
         <plugins>
